@@ -1,0 +1,88 @@
+
+This is what the command prompt looked like. I printed out the variables that are giving me issues. they are tf.Variable(s) so they should be 'mutable'
+as directed by the arrow below. Note that they say 'False'; next to them because I ran a test on each one to test its mutablity. I have done my looking and cannot figre out why this issue is occuring. 
+
+C:\Users\David Schneidau\Documents\MARIO_A3C\A3C_SMB2\A3C_SMB\SMB>python main.py
+C:\Users\David Schneidau\Documents\MARIO_A3C\A3C_SMB2\A3C_SMB\SMB\a3c_6.py:47: UserWarning: `tf.nn.rnn_cell.BasicLSTMCell` is deprecated and will be removed in a future version. This class is equivalent as `tf.keras.layers.LSTMCell`, and will be replaced by that in Tensorflow 2.0.
+  self.lstm_cell = tf.compat.v1.nn.rnn_cell.BasicLSTMCell(256, state_is_tuple=True)
+WARNING:tensorflow:From C:\Users\David Schneidau\Documents\MARIO_A3C\A3C_SMB2\A3C_SMB\SMB\a3c_6.py:111: dynamic_rnn (from tensorflow.python.ops.rnn) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `keras.layers.RNN(cell)`, which is equivalent to this API
+W1117 12:32:10.096113 28632 deprecation.py:350] From C:\Users\David Schneidau\Documents\MARIO_A3C\A3C_SMB2\A3C_SMB\SMB\a3c_6.py:111: dynamic_rnn (from tensorflow.python.ops.rnn) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `keras.layers.RNN(cell)`, which is equivalent to this API
+WARNING:tensorflow:From C:\Users\David Schneidau\AppData\Roaming\Python\Python310\site-packages\keras\layers\rnn\legacy_cells.py:797: calling Zeros.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+W1117 12:32:10.117044 28632 deprecation.py:554] From C:\Users\David Schneidau\AppData\Roaming\Python\Python310\site-packages\keras\layers\rnn\legacy_cells.py:797: calling Zeros.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+
+ <tf.Variable 'net_-1/conv_layers/W_base_conv1:0' shape=(8, 8, 3, 16) dtype=float32> False
+
+ <tf.Variable 'net_-1/conv_layers/b_base_conv1:0' shape=(16,) dtype=float32> False
+
+ <tf.Variable 'net_-1/conv_layers/W_base_conv2:0' shape=(4, 4, 16, 32) dtype=float32> False
+
+ <tf.Variable 'net_-1/conv_layers/b_base_conv2:0' shape=(32,) dtype=float32> False
+
+ <tf.Variable 'net_-1/base_lstm/W_base_fc1:0' shape=(2592, 256) dtype=float32> False
+
+ <tf.Variable 'net_-1/base_lstm/b_base_fc1:0' shape=(256,) dtype=float32> False
+
+ <tf.Variable 'net_-1/base_lstm/basic_lstm_cell/kernel:0' shape=(525, 1024) dtype=float32> False
+
+ <tf.Variable 'net_-1/base_lstm/basic_lstm_cell/bias:0' shape=(1024,) dtype=float32> False
+
+ <tf.Variable 'net_-1/policy/W_base_fc_p:0' shape=(256, 12) dtype=float32> False
+
+ <tf.Variable 'net_-1/policy/b_base_fc_p:0' shape=(12,) dtype=float32> False
+
+ <tf.Variable 'net_-1/value/W_base_fc_v:0' shape=(256, 1) dtype=float32> False
+
+ <tf.Variable 'net_-1/value/b_base_fc_v:0' shape=(1,) dtype=float32> False
+
+ <tf.Variable 'net_-1/deconv_pixel_change/W_pc_fc1:0' shape=(256, 3072) dtype=float32> False
+
+ <tf.Variable 'net_-1/deconv_pixel_change/b_pc_fc1:0' shape=(3072,) dtype=float32> False
+
+ <tf.Variable 'net_-1/deconv_pixel_change/W_pc_deconv_v:0' shape=(4, 4, 1, 32) dtype=float32> False
+
+ <tf.Variable 'net_-1/deconv_pixel_change/b_pc_deconv_v:0' shape=(1,) dtype=float32> False
+
+ <tf.Variable 'net_-1/deconv_pixel_change/W_pc_deconv_a:0' shape=(4, 4, 12, 32) dtype=float32> False
+
+ <tf.Variable 'net_-1/deconv_pixel_change/b_pc_deconv_a:0' shape=(12,) dtype=float32> False
+
+ <tf.Variable 'net_-1/reward_prediction/W_reward_prediction_fc1:0' shape=(7776, 3) dtype=float32> False
+
+ <tf.Variable 'net_-1/reward_prediction/b_reward_prediction_fc1:0' shape=(3,) dtype=float32> False
+Traceback (most recent call last):
+  File "C:\Users\David Schneidau\Documents\MARIO_A3C\A3C_SMB2\A3C_SMB\SMB\main.py", line 215, in <module>
+    tf.compat.v1.app.run()
+  File "C:\Users\David Schneidau\AppData\Roaming\Python\Python310\site-packages\tensorflow\python\platform\app.py", line 36, in run
+    _run(main=main, argv=argv, flags_parser=_parse_flags_tolerate_undef)
+  File "C:\Users\David Schneidau\AppData\Roaming\Python\Python310\site-packages\absl\app.py", line 308, in run
+    _run_main(main, args)
+  File "C:\Users\David Schneidau\AppData\Roaming\Python\Python310\site-packages\absl\app.py", line 254, in _run_main
+    sys.exit(main(argv))
+  File "C:\Users\David Schneidau\Documents\MARIO_A3C\A3C_SMB2\A3C_SMB\SMB\main.py", line 211, in main
+    app.run()
+  File "C:\Users\David Schneidau\Documents\MARIO_A3C\A3C_SMB2\A3C_SMB\SMB\main.py", line 96, in run
+    trainer = Trainer(i,
+  File "C:\Users\David Schneidau\Documents\MARIO_A3C\A3C_SMB2\A3C_SMB\SMB\trainer.py", line 57, in __init__
+    self.apply_gradients = grad_applier.minimize_local(self.local_network.total_loss,
+  File "C:\Users\David Schneidau\Documents\MARIO_A3C\A3C_SMB2\A3C_SMB\SMB\loss.py", line 88, in minimize_local
+    return self.apply_gradients(global_variables, local_gradients)
+  File "C:\Users\David Schneidau\Documents\MARIO_A3C\A3C_SMB2\A3C_SMB\SMB\loss.py", line 109, in apply_gradients
+    update_ops.append(self.dense(grad, var))
+  File "C:\Users\David Schneidau\Documents\MARIO_A3C\A3C_SMB2\A3C_SMB\SMB\loss.py", line 69, in dense
+    return training_ops.apply_rms_prop( variable,
+  File "C:\Users\David Schneidau\AppData\Roaming\Python\Python310\site-packages\tensorflow\python\ops\gen_training_ops.py", line 972, in apply_rms_prop
+    _, _, _op, _outputs = _op_def_library._apply_op_helper(
+  File "C:\Users\David Schneidau\AppData\Roaming\Python\Python310\site-packages\tensorflow\python\framework\op_def_library.py", line 779, in _apply_op_helper
+    _ExtractInputsAndAttrs(op_type_name, op_def, allowed_list_attr_map,
+  File "C:\Users\David Schneidau\AppData\Roaming\Python\Python310\site-packages\tensorflow\python\framework\op_def_library.py", line 693, in _ExtractInputsAndAttrs
+    raise TypeError(
+TypeError: 'ApplyRMSProp' Op requires that input 'var' be a mutable tensor (e.g.: a tf.Variable)
+
